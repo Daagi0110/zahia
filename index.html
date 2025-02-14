@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Баярын мэнд хөөрхөнөө</title>
+    <style>
+        body {
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .message {
+            font-size: 50px;
+            font-weight: bold;
+            position: absolute;
+            color: white;
+            animation: colorChange 1s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { color: red; }
+            20% { color: orange; }
+            40% { color: yellow; }
+            60% { color: green; }
+            80% { color: blue; }
+            100% { color: violet; }
+        }
+
+        .floating {
+            position: absolute;
+            bottom: -50px;
+            font-size: 30px;
+            animation: floatUp 4s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        function createMessage() {
+            let msg = document.createElement("div");
+            msg.innerText = "Баярын мэнд хөөрхөнөө!";
+            msg.classList.add("message");
+
+            // Санамсаргүй байрлал
+            msg.style.left = Math.random() * 80 + "vw";
+            msg.style.top = Math.random() * 80 + "vh";
+
+            // Санамсаргүй анивчих хурд
+            msg.style.animationDuration = (Math.random() * 1 + 0.5) + "s";
+
+            document.body.appendChild(msg);
+
+            setTimeout(() => {
+                msg.remove();
+            }, 2000);
+        }
+
+        function createFloatingElement(symbol) {
+            let elem = document.createElement("div");
+            elem.innerHTML = symbol;
+            elem.classList.add("floating");
+            elem.style.left = Math.random() * 100 + "vw";
+            elem.style.animationDuration = (Math.random() * 2 + 2) + "s";
+            elem.style.color = ["red", "pink", "yellow", "white"][Math.floor(Math.random() * 4)];
+            document.body.appendChild(elem);
+
+            setTimeout(() => {
+                elem.remove();
+            }, 4000);
+        }
+
+        setInterval(createMessage, 500); // "Баярын мэнд хөөрхөнөө!" 0.5 сек тутам гарна
+        setInterval(() => {
+            createFloatingElement("❤️");
+            createFloatingElement("✨");
+        }, 500);
+    </script>
+
+</body>
+</html>
